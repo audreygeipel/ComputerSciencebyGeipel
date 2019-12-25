@@ -1,0 +1,112 @@
+
+#os.system('ffmpeg -i watertest.mp4 -vf fps=1/5 out%d.png')
+	#os.system('ffmpeg -i <URL> -r 1 out%03d.jpg')
+
+	#for d in range(0,100, 5):
+		#os.system('ffmpeg -i watertest.mp4 -vf fps=1/5 frame%d.png')
+
+
+		
+
+#get the size of the inputfile
+#CHANGE THIS TO GET THE RIGHT INPUT FILE
+	inputfile = Image.open(str)
+	width, height = inputfile.size
+
+
+#create the outputfile as all white, in the right size
+	outputfile = Image.new( 'RGB', (width,height), "white")
+
+
+	from collections import deque
+
+	xqueue = []
+	yqueue = []
+
+#goes through picture 10 pixels at a time and if it is yellow, turns it black
+#then, if it is black, it is added to the queue
+#the next nested for loops go through all of the contiguous pixels and sees if they are also yellow, then they are turned black
+#CHANGE VALUES SO THEY FIND ORANGE 
+
+	for x in range(0, width, 10):
+		for y in range(0, height, 10):
+			r,g,b = inputfile.getpixel((x,y))
+			
+			if r>=90 and b<=80 and g<=100:
+				outputfile.putpixel((x,y), 0)
+				xqueue.append(x)
+				yqueue.append(y)
+
+			if xqueue and yqueue:
+				a = xqueue.pop()
+				b = yqueue.pop()
+
+				for r in range (-1, 1):
+					for c in range (-1,1):
+						i = a + r
+						j = b + c
+						
+						if i>0 and i<width and j>0 and j<height:
+
+							re,gr,bl = inputfile.getpixel((i,j))
+							w, m, n = outputfile.getpixel((i,j))
+
+							if re >= 90 and bl <= 80 and gr <= 100 and w == 255 and m == 255 and n == 255:
+								outputfile.putpixel((i,j), 0)
+								xqueue.append(i)
+								yqueue.append(j)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import cv2
+
+	vidcap = cv2.VideoCapture('wet test.mp4')
+	success,image = vidcap.read()
+	count = 0
+	while success:
+  		cv2.imwrite("frame%d.jpg" % count, image)     # save frame as JPEG file  
+  		#https://stackoverflow.com/questions/33311153/python-extracting-and-saving-video-frames
+
+
+
+
+
+
+
+  		#import subprocess as sp
+	#command = ['ffmpeg -i wettest.mp4 -vf fps=1 out%d.png']
+	
+	#ffmpeg -i wettest.mp4 -vf fps=1 out%d.png
+
+	
+#extract 3 frames at 1s, 2s, and 3.5s respectively
+
+extractFrames = require('ffmpeg-extract-frames')
+ 
+extractFrames({
+		input: 'wettest.mp4',
+		output: 'frame%i.jpg',
+		offsets: [ 1000, 2000, 3500]}
+
+#import subprocess
+	#subprocess.call("ffmpeg -i wettest.mp4 -vf fps=1 out%d.png")
