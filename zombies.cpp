@@ -2,7 +2,7 @@
 CS 103 Zombie-pocalypse PA
 Name: Audrey Geipel
 USC email: ageipel@usc.edu
-comments: help
+comments: N/A
 ***************************/
 #include <iostream>
 #include <cstdlib>
@@ -24,8 +24,9 @@ int onesim(){
   int reset = k;
   //for every zombie, randomly pick one spot in the array to bite
   //set zcount to 0, then go through and count the zombies to use in the
-  //next round of bites.
-  //add a night eveyr time it goes around, and end the while loop when there are only zombies
+  //next round of bites
+  //add a night every time it goes around, and end the 
+  //while loop when there are only zombies
  
   while(zcount < N){
    
@@ -77,7 +78,9 @@ int main(){
   }
 
   //declare a new array to store the results of the simulations
-  //call the function for one simulation, assign the number of nights to a spot in the array
+  //call the function for one simulation, 
+  //assign the number of nights to a spot in the array
+  
   int sims[10000];
   for(int e =0; e<10000;e++){
     sims[e] = 0;

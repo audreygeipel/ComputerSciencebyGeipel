@@ -60,6 +60,11 @@ for(int h = 51; h>=1; h--){
  **/
 void printCard(int id)
 {
+//This function takes the number mod13 and the remainder
+//is the value of the card.
+//Then it divides the given card number by 13, and 
+//the suit is assigned accordingly.
+
 	int z = id%13;
 	char tid = *type[z];
 	
@@ -86,7 +91,9 @@ cout << tid << "-" << sid;
  *  be adjusted externally based on the sum of the score.
  */
 int cardValue(int id){
-
+//This takes the given value and the remainder when
+//divded by 13 is the value, which is assigned
+//using the value array
 	int z = (id%13);
 	int vid = value[z];
 	
@@ -100,7 +107,8 @@ return vid;
  */
 void printHand(int hand[], int numCards)
 {
-  /******** You complete ****************/
+//This function implements the printCard function
+//for the number of cards in the hand.
 for(int i = 0; i< numCards; i++){
 	printCard(hand[i]); 
 	cout << " ";
@@ -116,8 +124,11 @@ cout << endl;
  *  and only being reduced to 1s as needed to avoid busting.
  */
 int getBestScore(int hand[], int numCards){
+//this function calculates the value of the hand
+//using the cardValue function
+//if the value is over 21, then it looks for an
+//ace, and if there is one, it subtracts 10.
 
-  /******** You complete ****************/
 int hvalue = 0;
 for(int j = 0; j<numCards; j++){
 	hvalue = hvalue + cardValue(hand[j]);
@@ -158,7 +169,6 @@ int main(int argc, char* argv[])
   // Do not change this code -- End
   //---------------------------------------
 
-  /******** You complete ****************/
 //shuffle cards and do initial deal
 char ans = 'y';
 
@@ -179,6 +189,9 @@ cout << "Player: ";
 printHand(phand, 2);
 
 int i = 2;
+
+//set up a while loop to keep asking for moves until the
+//player has 21 or more.
 
 while(getBestScore(phand, i)<21){
 	cout << "Type 'h' to hit and 's' to stay:";
@@ -202,10 +215,11 @@ while(getBestScore(phand, i)<21){
 
 
 	}//end of while
-//end of for
 
 int j = 2;
 
+//a series of if statements that output the appropriate
+//response to the result of the game.
 if(getBestScore(phand,i)>21){
 		cout << "Player busts" << endl;
 		cout << "Lose"<< " "<< getBestScore(phand,i);
@@ -256,7 +270,8 @@ else
 	}
 
 
-
+//This asks if the player wants to play again and then
+//repeats the whole loop of the game if the input is y.
 cout << endl;
 cout << "Play again? [y/n]" << endl;
 
